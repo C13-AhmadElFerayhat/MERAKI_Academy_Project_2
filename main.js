@@ -289,7 +289,8 @@ const foodRecipes = [
     }
 ]
 const filterE = [{"Difficulty": ["Easy", "Medium","Hard"]}, {"Rate": ["1/5","2/5","3/5","4/5","5/5"]}]
-const favA = []
+const favA = JSON.parse(localStorage.getItem("favorite")) || [];
+console.log(favA);
 const body = $("body")
 const mainImg = $("#mainImg")
 const recipes = $("#recipes")
@@ -306,6 +307,7 @@ const show = $("#show")
 let count = false
 let recipePage1 = $()
 let NewFoodRecipes = foodRecipes
+let favR = favA
 const render = () => {
   filterB.show()
     searchB.show()
@@ -344,7 +346,7 @@ const render = () => {
       if (e1.id == e.id) {
         console.log(1);
         fav2 = $(`<img class = ${title1} id = img3 src = "Newfolder/Untitled-1-Recovered.png">`)
-      }else{fav2 = $(`<img class = ${title1} id = img3 src = "Newfolder/Untitled-1.png">`)}
+      }
     });
     const favB = $(`${i}`)    
     const rate1 = e.rate
@@ -372,6 +374,7 @@ const render = () => {
     favA.push(e)    
     $(this).attr("src", "Newfolder/Untitled-1-Recovered.png")
     });
+    localStorage.setItem("favorite", JSON.stringify(favA))
 })
 })
 $(".f").on("click", function () {
@@ -395,15 +398,9 @@ $(".r").on("click", function () {
 }
   render()
 })
-filterB.on("click", function () {
-  console.log("2");
-  
-  if (show.css("display") === "none") {
-    show.css("display","block")
-  } else {
-    show.css("display","none")
-  }
-})
+favR = favA
+
+localStorage.setItem("favorite", JSON.stringify(favA))
 }
 
 
@@ -426,7 +423,7 @@ const Fav = function () {
   const filterR = $(`<dev id=Rate><p>Rate</p><dev id=rate1 ><button class = r >All</button><button class = r >1 star</button><button class = r >2 star</button><button class = r >3 star</button><button class = r >4 star</button><button class = r >5 star</button></dev></dev>`)
   filterC.append(filterD,filterR)
   // recipes
-  favA.forEach((e,i) => {
+  favR.forEach((e,i) => {
   const title1 = e.title
   const devrecipes = $(`<dev id = "devrecipes"></dev>`)
   const dev = $(`<dev id = ${title1}></dev>`)
@@ -468,18 +465,30 @@ const Fav = function () {
   favA.push(e)    
   $(this).attr("src", "Newfolder/Untitled-1-Recovered.png")
   });
+  localStorage.setItem("favorite", JSON.stringify(favA))
 })
 })
-filterB.on("click", function () {
-  console.log("2");
-  
-  if (show.css("display") === "none") {
-    show.css("display","block")
-  } else {
-    show.css("display","none")
-  }
-})
+$(".f").on("click", function () {
+  if ($(this).html().toUpperCase() == "ALL") {
+    favR = favA
+  }else{
+  favR = favA.filter((e,i) => {        
+  return $(this).html().toUpperCase() == e.difficulty.toUpperCase()
+  })
 }
+  Fav()
+})
+$(".r").on("click", function () {
+  if ($(this).html().toUpperCase() == "ALL") {
+    favR = favA
+  }else{
+  favR = favA.filter((e,i) => {        
+  return $(this).html().toUpperCase() == e.Rate.toUpperCase()
+  })
+}
+  Fav()
+})
+localStorage.setItem("favorite", JSON.stringify(favA))}
     
 
 const recipePage = function () {
@@ -525,7 +534,15 @@ search.on("change", () => {
     })}
     render()
 })
-
+filterB.on("click", function () {
+  console.log("2");
+  
+  if (show.css("display") === "none") {
+    show.css("display","block")
+  } else {
+    show.css("display","none")
+  }
+})
 Home.on("click", render)
 FAVOURITE.on("click", Fav)
 
