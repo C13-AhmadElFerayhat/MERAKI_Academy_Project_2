@@ -13,7 +13,8 @@ const foodRecipes = [
       5. Enjoy with pita bread or fresh vegetables.`,
       difficulty: "Easy",
       duration: "10 mins",
-      Rate: "5 star"
+      Num: 10,
+      Rate: "5 star",
     },
     {
       id: 2,
@@ -31,6 +32,7 @@ const foodRecipes = [
       7. Remove and drain on paper towels. Serve with tahini sauce, pita bread, and salad.`,
       difficulty: "Medium",
       duration: "45 mins",
+      Num: 45,
       Rate: "4 star"
     },
     {
@@ -48,6 +50,7 @@ const foodRecipes = [
       6. Roll or fold the pita and enjoy your homemade shawarma.`,
       difficulty: "Medium",
       duration: "60 mins",
+      Num: 60,
       Rate: "5 star"
     },
     {
@@ -65,6 +68,7 @@ const foodRecipes = [
       6. Serve in a bowl, drizzling olive oil and sprinkling chopped parsley on top. Enjoy with pita bread.`,
       difficulty: "Easy",
       duration: "30 mins",
+      Num: 30,
       Rate: "4 star"
     },
     {
@@ -80,6 +84,7 @@ const foodRecipes = [
       4. Taste and adjust seasoning as desired. Serve immediately for the freshest flavor.`,
       difficulty: "Easy",
       duration: "20 mins",
+      Num: 20,
       Rate: "5 star"
     },
     {
@@ -96,6 +101,7 @@ const foodRecipes = [
       5. Serve immediately and enjoy the fresh, tangy flavor.`,
       difficulty: "Easy",
       duration: "15 mins",
+      Num: 15,
       Rate: "4 star"
     },
     {
@@ -113,6 +119,7 @@ const foodRecipes = [
       6. Remove from the oven and let it cool slightly before slicing. Enjoy as a snack or appetizer.`,
       difficulty: "Medium",
       duration: "30 mins",
+      Num: 30,
       Rate: "4 star"
     },
     {
@@ -129,6 +136,7 @@ const foodRecipes = [
       5. Serve warm, garnished with extra caramelized onions if desired.`,
       difficulty: "Medium",
       duration: "45 mins",
+      Num: 45,
       Rate: "5 star"
     },
     {
@@ -146,6 +154,7 @@ const foodRecipes = [
       6. Garnish with chopped cilantro and serve with warm bread for dipping.`,
       difficulty: "Easy",
       duration: "20 mins",
+      Num: 20,
       Rate: "5 star"
     },
     {
@@ -162,6 +171,7 @@ const foodRecipes = [
       5. Serve hot with flatbread, yogurt sauce, and fresh vegetables.`,
       difficulty: "Medium",
       duration: "30 mins",
+      Num: 30,
       Rate: "5 star"
     },
     {
@@ -180,6 +190,7 @@ const foodRecipes = [
       7. Serve warm or at room temperature with extra lemon wedges.`,
       difficulty: "Hard",
       duration: "90 mins",
+      Num: 90,
       Rate: "4 star"
     },
     {
@@ -198,6 +209,7 @@ const foodRecipes = [
       7. Pour syrup over the baked baklava while still hot. Let it cool before serving.`,
       difficulty: "Hard",
       duration: "60 mins",
+      Num: 60,
       Rate: "5 star"
     },
     {
@@ -214,6 +226,7 @@ const foodRecipes = [
       5. Drizzle sugar syrup over the kunafa while hot, then sprinkle with crushed pistachios. Serve warm.`,
       difficulty: "Hard",
       duration: "60 mins",
+      Num: 60,
       Rate: "5 star"
     },
     {
@@ -228,7 +241,8 @@ const foodRecipes = [
       3. Tie the cloth and refrigerate for 12-24 hours to drain.
       4. Transfer labneh to a bowl and drizzle with olive oil. Serve with pita bread.`,
       difficulty: "Easy",
-      duration: "720 mins",
+      duration: "60 mins",
+      Num: 60,
       Rate: "5 star"
     },
     {
@@ -244,6 +258,7 @@ const foodRecipes = [
       4. Fry kibbeh until golden brown and cooked through. Serve warm.`,
       difficulty: "Medium",
       duration: "60 mins",
+      Num: 60,
       Rate: "5 star"
     },
     {
@@ -258,6 +273,7 @@ const foodRecipes = [
       3. Roll dough into circles, fill with spinach, fold, bake until golden.`,
       difficulty: "Medium",
       duration: "40 mins",
+      Num: 40,
       Rate: "5 star"
     },
     {
@@ -271,7 +287,8 @@ const foodRecipes = [
       2. Add ground walnuts and pomegranate, simmer until thick.
       3. Add chicken, cook until tender.`,
       difficulty: "Hard",
-      duration: "90 mins",
+      duration: "60 mins",
+      Num: 90,
       Rate: "5 star"
     },
     {
@@ -288,9 +305,10 @@ const foodRecipes = [
       Rate: "5 star"
     }
 ]
-const filterE = [{"Difficulty": ["Easy", "Medium","Hard"]}, {"Rate": ["1/5","2/5","3/5","4/5","5/5"]}]
-const favA = JSON.parse(localStorage.getItem("favorite")) || [];
-console.log(favA);
+const users = JSON.parse(localStorage.getItem("users")) || [];
+let user;
+let num;
+let favA = JSON.parse(localStorage.getItem("favorite")) || [];
 const body = $("body")
 const mainImg = $("#mainImg")
 const recipes = $("#recipes")
@@ -304,11 +322,31 @@ const FAVOURITE = $("#FAVOURITE")
 const filterC = $("#filterC")
 const filterB = $("#filterB")
 const show = $("#show")
+const log = $("#log")
+const modal = $("#modal")
+const modal2 = $("#modal2")
+const x = $("#x")
+const x1 = $(".x1")
+const regp = $("#regp")
+const su = $(".su")
+const uR = $("#uR")
+const passR = $("#passR")
+const regp2 = $("#regp2")
+const p2 = $("#p2")
+const sub = $(".sub")
+const uL = $("#uL")
+const passL = $("#passL")
+const p3 = $("#p3")
+const out = $("#out")
+const p1 = $("<p id = p1 >Welcome to The World of Middle Easten FOOOOD!!!!</p>")
 let count = false
 let recipePage1 = $()
 let NewFoodRecipes = foodRecipes
 let favR = favA
 const render = () => {
+  if (user != undefined) {
+    favA = user.fav
+  }
   filterB.show()
     searchB.show()
     search.show()
@@ -316,15 +354,21 @@ const render = () => {
     mainImg.html("")
     recipes.html("")
     filterC.html("")
-    let random = Math.floor(Math.random() * (NewFoodRecipes.length -1))
-    const imgselct = NewFoodRecipes[random].imageSrc
-    const p1 = $("<p id = p1 >Welcome to The World of Middle Easten FOOOOD!!!!</p>")
+    let random = Math.floor(Math.random() * (foodRecipes.length -1))
+    const imgselct = foodRecipes[random].imageSrc
     const img1 = $(`<img id = "mainImg1" src = "${imgselct}">`)
     mainImg.append(p1, img1)
     //filter  
     const filterD = $(`<dev id=Diff><p>Difficulty</p><dev id= diff1 ><button class = f >All</button><button class = f >Easy</button><button class = f >Medium</button><button class = f>Hard</button></dev></dev>`)
     const filterR = $(`<dev id=Rate><p>Rate</p><dev id=rate1 ><button class = r >All</button><button class = r >1 star</button><button class = r >2 star</button><button class = r >3 star</button><button class = r >4 star</button><button class = r >5 star</button></dev></dev>`)
-    filterC.append(filterD,filterR)
+    const filterT = $(`<dev id=T><p>Duration (between 0 and 90 mins)</p><dev id= t1 ><input class = t type="submit" value="Apply"><input type="range" id="vol" name="vol" min="0" max="90"><p id = p6></p><button class = t id = t >All</button>`)
+    filterC.append(filterD,filterR,filterT)
+    const SV = $("#vol")
+    const p6 = $("#p6")
+    p6.html(SV.val())
+    SV.on('input', function() {
+      p6.html($(this).val());
+    })
     // recipes
     NewFoodRecipes.forEach((e,i) => {
     const title1 = e.title
@@ -344,7 +388,6 @@ const render = () => {
     let fav2 = $(`<img class = ${title1} id = img3 src = "Newfolder/Untitled-1.png">`)
     favA.forEach(e1 => {
       if (e1.id == e.id) {
-        console.log(1);
         fav2 = $(`<img class = ${title1} id = img3 src = "Newfolder/Untitled-1-Recovered.png">`)
       }
     });
@@ -374,7 +417,11 @@ const render = () => {
     favA.push(e)    
     $(this).attr("src", "Newfolder/Untitled-1-Recovered.png")
     });
-    localStorage.setItem("favorite", JSON.stringify(favA))
+    if (user != undefined){
+    users[num] = user
+    localStorage.setItem("users", JSON.stringify(users))
+    }else{localStorage.setItem("favorite", JSON.stringify(favA))}
+
 })
 })
 $(".f").on("click", function () {
@@ -398,9 +445,23 @@ $(".r").on("click", function () {
 }
   render()
 })
+$(".t").on("click", function () {
+  if ($(this).html().toUpperCase() == "ALL") {
+    NewFoodRecipes = foodRecipes
+  }else{
+  NewFoodRecipes = foodRecipes.filter((e,i) => {
+    
+  return $("#vol").val() > e.Num
+  })
+}
+  render()
+})
 favR = favA
 
-localStorage.setItem("favorite", JSON.stringify(favA))
+if (user != undefined){
+  users[num] = user
+  localStorage.setItem("users", JSON.stringify(users))
+  }else{localStorage.setItem("favorite", JSON.stringify(favA))}
 }
 
 
@@ -420,8 +481,15 @@ const Fav = function () {
   mainImg.append(p1, img1)
   //filter  
   const filterD = $(`<dev id=Diff><p>Difficulty</p><dev id= diff1 ><button class = f >All</button><button class = f >Easy</button><button class = f >Medium</button><button class = f>Hard</button></dev></dev>`)
-  const filterR = $(`<dev id=Rate><p>Rate</p><dev id=rate1 ><button class = r >All</button><button class = r >1 star</button><button class = r >2 star</button><button class = r >3 star</button><button class = r >4 star</button><button class = r >5 star</button></dev></dev>`)
-  filterC.append(filterD,filterR)
+    const filterR = $(`<dev id=Rate><p>Rate</p><dev id=rate1 ><button class = r >All</button><button class = r >1 star</button><button class = r >2 star</button><button class = r >3 star</button><button class = r >4 star</button><button class = r >5 star</button></dev></dev>`)
+    const filterT = $(`<dev id=T><p>Duration (between 0 and 90 mins)</p><dev id= t1 ><input class = t type="submit" value="Apply"><input type="range" id="vol" name="vol" min="0" max="90"><p id = p6></p><button class = t id = t >All</button>`)
+    filterC.append(filterD,filterR,filterT)
+    const SV = $("#vol")
+    const p6 = $("#p6")
+    p6.html(SV.val())
+    SV.on('input', function() {
+      p6.html($(this).val());
+    })
   // recipes
   favR.forEach((e,i) => {
   const title1 = e.title
@@ -465,7 +533,10 @@ const Fav = function () {
   favA.push(e)    
   $(this).attr("src", "Newfolder/Untitled-1-Recovered.png")
   });
-  localStorage.setItem("favorite", JSON.stringify(favA))
+  if (user != undefined){
+    users[num] = user
+    localStorage.setItem("users", JSON.stringify(users))
+    }else{localStorage.setItem("favorite", JSON.stringify(favA))}
 })
 })
 $(".f").on("click", function () {
@@ -488,7 +559,22 @@ $(".r").on("click", function () {
 }
   Fav()
 })
-localStorage.setItem("favorite", JSON.stringify(favA))}
+$(".t").on("click", function () {
+  if ($(this).html().toUpperCase() == "ALL") {
+    favR = favA
+  }else{
+    favR = favA.filter((e,i) => {
+    
+  return $("#vol").val() > e.Num
+  })
+}
+  Fav()
+})
+
+if (user != undefined){
+  users[num] = user
+  localStorage.setItem("users", JSON.stringify(users))
+  }else{localStorage.setItem("favorite", JSON.stringify(favA))}}
     
 
 const recipePage = function () {
@@ -514,11 +600,6 @@ const recipePage = function () {
         <dev id = "ingredients"><h2>Ingredients:</h3><p>${newFoodRecipes[0].ingredients}</p></dev>
         <dev id = "howToPrepare"><h2>How to Prepare:</h3><p>${newFoodRecipes[0].howToPrepare}</p></dev>`)
 
-    favA.forEach(e1 => {
-      if (e1.id == e.id) {
-        fav2 = $(`<img class = ${title1} id = img3 src = "Newfolder/Untitled-1-Recovered.png">`)
-      }else{fav2 = $(`<img class = ${title1} id = img3 src = "Newfolder/Untitled-1.png">`)}
-    });
 rp = $("#recipePage")
 rp.append(recipePage1)
 }  
@@ -535,7 +616,6 @@ search.on("change", () => {
     render()
 })
 filterB.on("click", function () {
-  console.log("2");
   
   if (show.css("display") === "none") {
     show.css("display","block")
@@ -545,4 +625,79 @@ filterB.on("click", function () {
 })
 Home.on("click", render)
 FAVOURITE.on("click", Fav)
+log.on("click", () => {
+  p3.text("Don't have an account, please")
+  modal.css("display", "block")
+})
+x.on("click", () => {
+  modal.css("display", "none")
+})
+x1.on("click", () => {
+  modal2.css("display", "none")
+})
+regp.on("click", () => {
+  modal.css("display", "none")
+  modal2.css("display", "block")
+})
+su.on("click", () => {
+  p2.text("")
+  regp2.text("")
+  let c=0
+  
+  users.forEach(e => {
+    
+  if (e.username == uR.val()) {
+    c=1
+  }
+})
+if (c == 1){
+    p2.text("User already exist, please try another username..")
+    regp2.text("")
+  }else{ 
+    users.push({ username: uR.val(),
+    password: passR.val(),
+    fav: []
+    })
+    p2.text("Now you can login on ")
+    regp2.text("login page")
+    regp2.on("click", () => {
+      modal.css("display", "block")
+      modal2.css("display", "none")
+    })
+}
 
+if (user != undefined){
+  users[num] = user
+  localStorage.setItem("users", JSON.stringify(users))
+  }else{localStorage.setItem("favorite", JSON.stringify(favA))}
+})
+
+sub.on("click", () => {
+  let c = 0
+  users.forEach((e,i) => {
+    if (e.username == uL.val() && e.password == passL.val()) {
+      c=1
+      num = i
+      user = e;
+      render()
+    }
+})
+if (c==1) {
+  modal.css("display", "none")
+  out.css("display", "block")
+  log.css("display", "none")
+  alert(`login successfully!!!`)
+  p1.text(`Welcome back ${user.username}`)
+  }else{
+    p3.text("Wrong username or password please try again or ");
+  }
+  
+})
+out.on("click",() => {
+  out.css("display", "none")
+  log.css("display", "block")
+  alert(`sign out successfully!!!`)
+  p1.text(`Welcome to The World of Middle Easten FOOOOD!!!!`)
+  user = undefined
+  num = undefined
+})

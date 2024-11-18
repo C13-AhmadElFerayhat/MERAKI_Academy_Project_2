@@ -153,7 +153,6 @@ border-radius: 20px;
     display: flex;
   }
   .searchTerm {
-    width: 100%;
     border: 3px solid #eb9d17;
     border-right: none;
     padding: 5px;
@@ -236,6 +235,21 @@ font-weight: 700;
     cursor: pointer;
     color: rgba(0, 0, 0);
 }
+.t{
+    background-color: #eb9d17;
+    padding: 3px 10px;
+    border-radius: 5px;
+    box-shadow: 0 3px 20px 0 rgba(0, 0, 0, 0.856);
+    border: 1px solid rgba(255, 255, 255, 0.178);
+    color: rgb(255, 250, 250);
+    font-size: 20px;
+    align-items: center
+}
+.t:hover{
+    background-color:#eb9d17;
+    cursor: pointer;
+    color: rgba(0, 0, 0);
+}
 #show{
     display: none;
     background-color: #764463ce;
@@ -249,9 +263,54 @@ font-weight: 700;
 #filterC{
     display: grid;
     grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
 justify-content: center;
 align-items: center;
 }
+#T{
+    display: grid;
+    justify-items: center;
+    border-radius: 20px;
+    border: 1px solid #eb9d17;
+}
+#t1{
+    display: grid;
+    grid-template-columns:1fr 1fr 1fr;
+    gap: 20px;
+    justify-items: center;
+    position: relative;
+    bottom:10px;
+    align-items: center;
+}
+#vol {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 25px;
+    background: #eb9d17;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+  }
+  
+  #vol:hover {
+    opacity: 1;
+  }
+  
+  #vol::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    background: #764463;
+    cursor: pointer;
+  }
+  
+  #vol::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+  }
 #Rate{
 display: grid;
 justify-items: center;
@@ -280,6 +339,7 @@ bottom:10px
         position: relative;
         bottom:10px
     }
+
 #filterB{
     background-color: #764463;
     padding: 3px 10px;
@@ -298,4 +358,124 @@ bottom:10px
 }
 #recipesIMG{
     width: 400px;
+}
+#modal{
+    display: none; 
+    position: fixed; 
+    z-index: 1; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0,0.4); 
+    padding-top: 60px;
+   
+}
+#up{
+    background-color: #bb83a6f6;
+    border-radius: 20px;
+    box-shadow: 0 3px 20px 0 rgba(0, 0, 0, 0.856);
+    border: 3px solid rgba(255, 255, 255, 0.178);
+    margin: 0px auto 0px auto;
+    border: 1px solid #888;
+    width: 80%;
+    display: grid;
+}
+#hl
+{
+    background-color: #eb9d17;
+    border-radius: 20px 20px 0px 0px;
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+align-items: flex-end;
+height: 70%;
+}
+#t{
+    grid-column-start: 2;
+    
+}
+#x{
+margin-right: 20px;
+color: #000;
+  font-size: 35px;
+  font-weight: bold;
+}
+  #x:hover,
+  #x:focus {
+  color: red;
+  cursor: pointer;
+}
+#lo{
+    margin-left: 20px;
+    margin-top: 50px;
+}
+#sub{
+    background-color: #eb9d17da;
+     padding: 14px 20px;
+  margin-bottom: 1%;
+  box-shadow: 0 3px 20px 0 rgba(0, 0, 0, 0.856);
+    border: 3px solid rgba(255, 255, 255, 0.178);
+    border: 1px solid #888;
+    /* width: 80%; */
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+#sub:hover{
+    opacity: 0.7;
+    color: rgb(255, 255, 255)
+}
+.in{
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+#reg{
+    display: flex;
+    gap: 5px;
+}
+
+#regp:hover,
+#regp:focus {
+color: #eb9501;
+cursor: pointer; 
+}
+#regP{
+    display: none;
+    background-color: #bb83a6f6;
+    border-radius: 20px;
+    box-shadow: 0 3px 20px 0 rgba(0, 0, 0, 0.856);
+    border: 3px solid rgba(255, 255, 255, 0.178);
+    margin: 0px auto 0px auto;
+    border: 1px solid #888;
+    width: 80%;
+    display: grid;
+}
+#modal2{
+    display: none; 
+    position: fixed; 
+    z-index: 1; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0,0.4); 
+    padding-top: 60px; 
+}
+
+#regp2:hover,
+#regp2:focus {
+color: #eb9501;
+cursor: pointer; 
+}
+#out{
+    display: none;
 }
